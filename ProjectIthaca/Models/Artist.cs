@@ -116,6 +116,60 @@ namespace ProjectIthaca.Models
       return allArtists;
     }
 
+    public List<Genre> GetGenres()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT genre_id FROM genres_artits WHERE artist_id = @artisttId;";
+
+      MySqlParameter artistIdParameter = new MySqlParameter();
+      artistIdParameter.ParameterName = "@artistId";
+      artistIdParameter.Value = _id;
+      cmd.Parameters.Add(artistIdParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      List<int> genreIds = new List<int> {};
+      while(rdr.Read())
+      {
+        int genreId = rdr.GetInt32(0);
+        genreIds.Add(genreId);
+      }
+      rdr.Dispose(); //can only have one open reader @ a time
+
+      List<Genre> genres = new List<Genre> {};
+      foreach (int genreId in genreIds)
+      {
+        var genreQuery = conn.CreateCommand() as MySqlCommand;
+        genreQuery.CommandText = @"SELECT * FROM genre WHERE id = @GenreId;";
+
+        MySqlParameter genreIdParameter = new MySqlParameter();
+        genreIdParameter.ParameterName = "@GenreId";
+        genreIdParameter.Value = genreId;
+        genreQuery.Parameters.Add(genreIdParameter);
+
+        var genreQueryRdr = genreQuery.ExecuteReader() as MySqlDataReader;
+        while(genreQueryRdr.Read())
+        {
+          int thisGenreId = genreQueryRdr.GetInt32(0);
+          string genreName = genreQueryRdr.GetString(1);
+          string genreDescription = genreQueryRdr.GetString(2);
+          string genreEra = genreQueryRdr.GetString(3);
+
+          Genre foundGenre = new Genre(genreName, genreDescription, genreEra, thisGenreId);
+          stylists.Add(foundGenre);
+        }
+        genreQueryRdr.Dispose();
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return genres;
+    }
+
     public void Save()
     {
       MySqlConnection conn = DB.Connection();
@@ -223,12 +277,12 @@ namespace ProjectIthaca.Models
       return foundArtist;
     }
 
-    public void AddArtist(Artist newArtist)
+    public void AddGenre(Genre newGenre)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO genre_artists
+      cmd.CommandText = @"INSERT INTO genres_artists
       (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
 
       MySqlParameter genre_id = new MySqlParameter();
@@ -247,62 +301,9 @@ namespace ProjectIthaca.Models
       {
         conn.Dispose();
       }
-
     }
 
-    public List<Genre> GetGenres()
-    {
-        MySqlConnection conn = DB.Connection();
-        conn.Open();
-        var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"SELECT genre_id FROM genres_artits WHERE artist_id = @artisttId;";
 
-        MySqlParameter artistIdParameter = new MySqlParameter();
-        artistIdParameter.ParameterName = "@artistId";
-        artistIdParameter.Value = _id;
-        cmd.Parameters.Add(artistIdParameter);
-
-        var rdr = cmd.ExecuteReader() as MySqlDataReader;
-
-        List<int> genreIds = new List<int> {};
-        while(rdr.Read())
-        {
-            int genreId = rdr.GetInt32(0);
-            genreIds.Add(genreId);
-        }
-        rdr.Dispose(); //can only have one open reader @ a time
-
-        List<Genre> genres = new List<Genre> {};
-        foreach (int genreId in genreIds)
-        {
-            var genreQuery = conn.CreateCommand() as MySqlCommand;
-            genreQuery.CommandText = @"SELECT * FROM genre WHERE id = @GenreId;";
-
-            MySqlParameter genreIdParameter = new MySqlParameter();
-            genreIdParameter.ParameterName = "@GenreId";
-            genreIdParameter.Value = genreId;
-            genreQuery.Parameters.Add(genreIdParameter);
-
-            var genreQueryRdr = genreQuery.ExecuteReader() as MySqlDataReader;
-            while(genreQueryRdr.Read())
-            {
-                int thisGenreId = genreQueryRdr.GetInt32(0);
-                string genreName = genreQueryRdr.GetString(1);
-                string genreDescription = genreQueryRdr.GetString(2);
-                string genreEra = genreQueryRdr.GetString(3);
-
-                Genre foundGenre = new Genre(genreName, genreDescription, genreEra, thisGenreId);
-                stylists.Add(foundGenre);
-            }
-            genreQueryRdr.Dispose();
-        }
-        conn.Close();
-        if (conn != null)
-        {
-            conn.Dispose();
-        }
-        return genres;
-    }
 
   }
 }

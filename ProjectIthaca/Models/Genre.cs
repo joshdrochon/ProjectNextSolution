@@ -42,120 +42,122 @@ namespace ProjectIthaca.Models
       _name = newName;
     }
 
-    //_email getter/setter
-    public string GetEmail()
+    //_description getter/setter
+    public string GetDescription()
     {
-      return _email;
+      return _description;
     }
-    public void SetEmail(string newEmail)
+    public void SetDescription(string newDescription)
     {
-      _email = newEmail;
-    }
-
-    //_startdate getter/setter
-    public string GetStartDate()
-    {
-      return _startdate;
-    }
-    public void SetStartDate(string newStartDate)
-    {
-      _startdate = newStartDate;
+      _description = newDescription;
     }
 
-    public override bool Equals(System.Object otherStylist)
+    //_era getter/setter
+    public string GetEra()
     {
-      if (!(otherStylist is Stylist))
+      return _era;
+    }
+    public void SetEra(string newEra)
+    {
+      _era = neEra;
+    }
+
+    public override bool Equals(System.Object otherGenre)
+    {
+      if (!(otherGenre is Genre))
       {
         return false;
       }
       else
       {
-        Stylist newStylist = (Stylist) otherStylist;
-        bool idEquality = (this.GetId() == newStylist.GetId());
+        Genre newGenre = (Genre) otherGenre;
+        bool idEquality = (this.GetId() == newGenre.GetId());
 
         return (idEquality);
       }
     }
 
-    public List<Client> GetClients()
+    public static List<Genre> GetAll()
     {
-        MySqlConnection conn = DB.Connection();
-        conn.Open();
-        var cmd = conn.CreateCommand() as MySqlCommand;
-        cmd.CommandText = @"SELECT client_id FROM client_stylist WHERE stylist_id = @StylistId;";
-
-        MySqlParameter stylistIdParameter = new MySqlParameter();
-        stylistIdParameter.ParameterName = "@StylistId";
-        stylistIdParameter.Value = _id;
-        cmd.Parameters.Add(stylistIdParameter);
-
-        var rdr = cmd.ExecuteReader() as MySqlDataReader;
-
-        List<int> clientIds = new List<int> {};
-        while(rdr.Read())
-        {
-            int clientId = rdr.GetInt32(0);
-            clientIds.Add(clientId);
-        }
-        rdr.Dispose();
-
-        List<Client> clients = new List<Client> {};
-        foreach (int clientId in clientIds)
-        {
-            var clientQuery = conn.CreateCommand() as MySqlCommand;
-            clientQuery.CommandText = @"SELECT * FROM client WHERE id = @ClientId;";
-
-            MySqlParameter clientIdParameter = new MySqlParameter();
-            clientIdParameter.ParameterName = "@ClientId";
-            clientIdParameter.Value = clientId;
-            clientQuery.Parameters.Add(clientIdParameter);
-
-            var clientQueryRdr = clientQuery.ExecuteReader() as MySqlDataReader;
-            while(clientQueryRdr.Read())
-            {
-                int thisClientId = clientQueryRdr.GetInt32(0);
-                string clientName = clientQueryRdr.GetString(1);
-                string clientEmail = clientQueryRdr.GetString(2);
-                string clientFirstAppt = clientQueryRdr.GetString(3);
-
-
-                Client foundClient = new Client(clientName, clientEmail, clientFirstAppt, thisClientId);
-                clients.Add(foundClient);
-            }
-            clientQueryRdr.Dispose();
-        }
-        conn.Close();
-        if (conn != null)
-        {
-            conn.Dispose();
-        }
-        return clients;
-    }
-
-    public static List<Stylist> GetAll()
-    {
-      List<Stylist> allStylists = new List<Stylist>();
+      List<Genre> allGenres = new List<Genre>();
       MySqlConnection conn = DB.Connection();
       conn.Open();
       MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist;";
+      cmd.CommandText = @"SELECT * FROM genres;";
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
       while(rdr.Read())
       {
-        int stylistId = rdr.GetInt32(0);
-        string stylistName = rdr.GetString(1);
-        string stylistEmail = rdr.GetString(2);
-        string stylistStartDate = rdr.GetString(3);
-        Stylist newStylist = new Stylist
-        (stylistName, stylistEmail, stylistStartDate, stylistId);
-        allStylists.Add(newStylist);
+        int genreId = rdr.GetInt32(0);
+        string genreName = rdr.GetString(1);
+        string genreDescription = rdr.GetString(2);
+        string genreEra = rdr.GetString(3);
+
+        Genre newGenre = new Genre
+        (genreName, genreDescription, genreEra, genreId);
+
+        allGenres.Add(newGenre);
       }
       conn.Close();
       if(conn != null)
       {
         conn.Dispose();
       }
-      return allStylists;
+      return allGenres;
+    }
+
+    public List<Artist> GetArtists()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT artist_id FROM genres_artists WHERE genre_id = @genreId;";
+
+      MySqlParameter genreIdParameter = new MySqlParameter();
+      genreIdParameter.ParameterName = "@GenreId";
+      genreIdParameter.Value = _id;
+      cmd.Parameters.Add(genreIdParameter);
+
+      var rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+      List<int> artistIds = new List<int> {};
+      while(rdr.Read())
+      {
+          int artistId = rdr.GetInt32(0);
+          artistIds.Add(artistId);
+      }
+      rdr.Dispose();
+
+      List<Artist> artists = new List<Artist> {};
+      foreach (int artistId in artistIds)
+      {
+        var artistQuery = conn.CreateCommand() as MySqlCommand;
+        artistQuery.CommandText = @"SELECT * FROM artists WHERE id = @ArtistId;";
+
+        MySqlParameter artistIdParameter = new MySqlParameter();
+        artistIdParameter.ParameterName = "@ArtistId";
+        artistIdParameter.Value = artistId;
+        artistQuery.Parameters.Add(artistIdParameter);
+
+        var artistQueryRdr = artistQuery.ExecuteReader() as MySqlDataReader;
+        while(artistQueryRdr.Read())
+        {
+          int thisArtistId = artistQueryRdr.GetInt32(0);
+          string artistName = artistQueryRdr.GetString(1);
+          string artistDebut = artistQueryRdr.GetString(2);
+          string artistDescription = artistQueryRdr.GetString(3);
+          bool artistActive = rdr.GetBool(4);
+
+          Artist foundArtist = new Artist(artistName, artistDebut, artistDescription, thisArtistId);
+          artists.Add(foundArtist);
+        }
+        artistQueryRdr.Dispose();
+      }
+      conn.Close();
+      if (conn != null)
+      {
+          conn.Dispose();
+      }
+      return artists;
     }
 
     public void Save()
@@ -165,11 +167,11 @@ namespace ProjectIthaca.Models
 
       var cmd = conn.CreateCommand() as MySqlCommand;
 
-      cmd.CommandText = @"INSERT INTO stylist (id, name, email, startdate)
-      VALUES (@stylistId, @stylistName, @stylistEmail, @stylistStartDate);";
+      cmd.CommandText = @"INSERT INTO genres (id, name, description, era)
+      VALUES (@genreId, @genreName, @genreDescription, @genreEra);";
 
       MySqlParameter id = new MySqlParameter();
-      id.ParameterName = "@stylistId";
+      id.ParameterName = "@genreId";
       id.Value = this._id;
       cmd.Parameters.Add(id);
 
@@ -178,15 +180,15 @@ namespace ProjectIthaca.Models
       name.Value = this._name;
       cmd.Parameters.Add(name);
 
-      MySqlParameter email = new MySqlParameter();
-      email.ParameterName = "@stylistEmail";
-      email.Value = this._email;
-      cmd.Parameters.Add(email);
+      MySqlParameter description = new MySqlParameter();
+      description.ParameterName = "@genreDescription";
+      description.Value = this._description;
+      description.Parameters.Add(email);
 
-      MySqlParameter startdate = new MySqlParameter();
-      startdate.ParameterName = "@stylistStartDate";
-      startdate.Value = this._startdate;
-      cmd.Parameters.Add(startdate);
+      MySqlParameter era = new MySqlParameter();
+      era.ParameterName = "@genreEra";
+      era.Value = this._era;
+      cmd.Parameters.Add(era);
 
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
@@ -204,7 +206,7 @@ namespace ProjectIthaca.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM stylist;";
+      cmd.CommandText = @"DELETE FROM genres;";
 
       cmd.ExecuteNonQuery();
 
@@ -221,7 +223,7 @@ namespace ProjectIthaca.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT * FROM stylist WHERE id = @thisId;";
+      cmd.CommandText = @"SELECT * FROM genres WHERE id = @thisId;";
 
       MySqlParameter thisId = new MySqlParameter();
       thisId.ParameterName = "@thisId";
@@ -230,23 +232,23 @@ namespace ProjectIthaca.Models
 
       var rdr = cmd.ExecuteReader() as MySqlDataReader;
 
-      int stylistId = 0;
-      string stylistName = "";
-      string stylistEmail = "";
-      string stylistStartDate = "";
+      int genreId = 0;
+      string genreName = "";
+      string genreDescription = "";
+      string genreEra = "";
 
 
       while(rdr.Read())
       {
         //arguments in rdr methods correspond to index of the table rows
-        stylistId = rdr.GetInt32(0);
-        stylistName = rdr.GetString(1);
-        stylistEmail = rdr.GetString(2);
-        stylistStartDate = rdr.GetString(3);
+        genreId = rdr.GetInt32(0);
+        genreName = rdr.GetString(1);
+        genreDescription = rdr.GetString(2);
+        genreEra = rdr.GetString(3);
       }
 
-      Stylist foundStylist = new Stylist
-      (stylistName, stylistEmail, stylistStartDate, stylistId);
+      Genre foundGenre = new Genre
+      (genreEra, genreName, genreDescription, genreId);
 
       conn.Close();
       if(conn != null)
@@ -254,33 +256,36 @@ namespace ProjectIthaca.Models
         conn.Dispose();
       }
 
-      return foundStylist;
+      return foundGenre;
     }
-
-    public void AddClient(Client newClient)
+    
+    public void AddArtist(Artist newArtist)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO client_stylist (stylist_id, client_id) VALUES (@StylistId, @ClientId);";
+      cmd.CommandText = @"INSERT INTO genres_artists
+      (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
 
-      MySqlParameter stylist_id = new MySqlParameter();
-      stylist_id.ParameterName = "@StylistId";
-      stylist_id.Value = _id;
-      cmd.Parameters.Add(stylist_id);
+      MySqlParameter genre_id = new MySqlParameter();
+      genre_id.ParameterName = "@GenreId";
+      genre_id.Value = newGenre.GetId();
+      cmd.Parameters.Add(genre_id);
 
-      MySqlParameter client_id = new MySqlParameter();
-      client_id.ParameterName = "@ClientId";
-      client_id.Value = newClient.GetId();
-      cmd.Parameters.Add(client_id);
+      MySqlParameter artist_id = new MySqlParameter();
+      artist_id.ParameterName = "@ArtistId";
+      artist_id.Value = _id;
+      cmd.Parameters.Add(artist_id);
 
       cmd.ExecuteNonQuery();
       conn.Close();
-      if (conn != null)
+      if(conn != null)
       {
-          conn.Dispose();
+        conn.Dispose();
       }
+
     }
+
 
   }
 }
