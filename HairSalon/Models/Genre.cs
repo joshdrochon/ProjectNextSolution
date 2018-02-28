@@ -1,22 +1,25 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using HairSalonProject;
+using ProjectIthaca;
 using System;
 
-namespace HairSalonProject.Models
+namespace ProjectIthaca.Models
 {
-  public class Stylist
+  public class Genre
   {
     private int _id;
     private string _name;
-    private string _email;
-    private string _startdate;
-    public Stylist(string Name, string Email, string StartDate, int Id=0)
+    private string _description;
+    private string _era;
+
+
+    public Stylist(string Name, string Description, string Era, int Id=0)
     {
       this._id = Id;
       this._name = Name;
-      this._email = Email;
-      this._startdate = StartDate;
+      this._description = Description;
+      this._era= Era;
+
     }
 
     //_id getter/setter

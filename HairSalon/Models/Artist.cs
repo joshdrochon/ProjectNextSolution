@@ -1,24 +1,25 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-using HairSalonProject;
+using ProjectIthaca;
 using System;
 
-namespace HairSalonProject.Models
+namespace ProjectIthaca.Models
 {
-  public class Client
+  public class Artist
   {
     private int _id;
     private string _name;
-    private string _email;
-    private string _firstappt;
+    private string _debut;
+    private string _description;
+    private bool _active;
 
-    public Client(string Name, string Email, string FirstAppt, int Id=0)
+    public Artist(string Name, string Debut, string Description, bool Active, int Id=0)
     {
       this._id = Id;
       this._name = Name;
-      this._email = Email;
-      this._firstappt = FirstAppt;
-
+      this._debut = Debut;
+      this._description = Description;
+      this._active = Active;
     }
 
     //_id getter/setter
@@ -41,24 +42,34 @@ namespace HairSalonProject.Models
       _name = newName;
     }
 
-    //_email getter/setter
-    public string GetEmail()
+    //_debut getter/setter
+    public string GetDebut()
     {
-      return _email;
+      return _debut;
     }
-    public void SetEmail(string newEmail)
+    public void SetDebut(string newDebut)
     {
-      _email = newEmail;
+      _debut = newDebut;
     }
 
-    //_startdate getter/setter
-    public string GetFirstAppt()
+    //_description getter/setter
+    public string GetDescription()
     {
-      return _firstappt;
+      return _description;
     }
-    public void SetFirstAppt(string newFirstAppt)
+    public void SetDescription(string newDescription)
     {
-      _firstappt = newFirstAppt;
+      _description = newDescription;
+    }
+
+    //_active setter/getter
+    public bool GetActive()
+    {
+      return _active
+    }
+    public void SetActive(bool newActive)
+    {
+      _active = newActive
     }
 
     public override bool Equals(System.Object otherClient)

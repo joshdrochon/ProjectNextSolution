@@ -1,19 +1,13 @@
-# _Hair Salon Application_
+# _Project Ithaca_
 
-#### _Web App for Hair Salon 02/16/18_
+#### _Web App for Project Ithaca Radio 02/16/18_
 
 #### By _**Josh Rochon**_
 
 ## Description
 
-User Stories:
-
-Expected Behaviors:
-  Employee can see a list of all our stylists.
-	Employee can select a stylist, see their details, and see a list of all clients that belong to that stylist.
-  Employee can add a client to a specific stylist.
-  Employee can delete all stylists and/or clients from the database.
-	Employee will not be able to add a new client if there are no stylists in the database.
+CLIENT CLASS TO BE REPLACED BY ARTIST
+STYLIST CLASS TO BE REPLACED BY GENRE
 
 ## Setup/Installation Requirements
 
