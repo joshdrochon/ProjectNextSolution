@@ -1,0 +1,21 @@
+@{
+  Layout = "_Layout";
+}
+<div class="jumbotron">
+  <p><a href="/">Home</a></p>
+  <p><text>Name: </text>@Model.GetName()</p>
+  <p><text>Email: </text>@Model.GetEmail()</p>
+  <p><text>Startdate: </text>@Model.GetStartDate()</p>
+  <p>Clients:</p>
+  <ul>
+    @foreach(var client in Model.GetClients())
+    {
+      <li>@client.GetName()</li>
+    }
+  </ul>
+  <p><a href="/clients/new">Add Client</a></p>
+
+  <!-- <a href='/stylists/new'>Add stylist</a> -->
+</div>
+
+<!-- Model refers to whatever is passed into the View's parameters. In this case it's return View(stylist); -->

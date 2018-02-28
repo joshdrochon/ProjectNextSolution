@@ -1,0 +1,57 @@
+body{
+  background-color: #7E8F7C;
+}
+
+#stylist-list{
+    list-style-type: none;
+    color: white;
+    margin: auto;
+    margin: 20px;
+  }
+
+#client-list{
+  color: white;
+  margin: auto;
+  margin: 20px;
+}
+
+#all-clients{
+  color: lightgray;
+
+}
+
+form{
+  text-align: center;
+}
+
+input{
+  box-shadow: 0 0 2px black inset;
+}
+
+.footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  background-color: #7E8F7C;
+  text-align: center;
+}
+
+.jumbotron{
+  background-color: #878787;
+  box-shadow: 0 0 10px black;
+}
+
+a{
+  color: #3b5998;
+}
+
+a:hover{
+  color: #3e5998;
+}
+
+ul li{
+ font-size: 20px;
+ font-weight: normal;
+}

@@ -1,0 +1,32 @@
+@{
+  Layout = "_Layout";
+}
+
+<!--each new list item is an instance of the Stylist class-->
+<div class="jumbotron">
+  <p><a id="all-clients" href="/clients">View all clients</a></p>
+  <h1>Stylists</h1>
+    @foreach (var stylist in Model)
+    {
+      <h3 id="stylist-list"><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></h3>
+    }
+  <p><a href="/stylists/new">Add Stylist</a></p>
+</div>
+<div class="footer">
+  <form action="/stylists/delete" id="clear-stylists" method="post">
+    <button class="btn btn-danger" type="submit" name="button">Clear all Stylists</button>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#clear-stylists").submit(function(event) {
+      var doDelete = confirm("Are you sure you want delete all stylists?");
+      if (!doDelete) {
+        event.preventDefault();
+      }
+    });
+  });
+</script>
+
+<!-- RUN - apm install language-cshtml in terminal to override default plain text -->
