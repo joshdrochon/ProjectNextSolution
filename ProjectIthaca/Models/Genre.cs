@@ -258,7 +258,7 @@ namespace ProjectIthaca.Models
 
       return foundGenre;
     }
-    
+
     public void AddArtist(Artist newArtist)
     {
       MySqlConnection conn = DB.Connection();
@@ -285,7 +285,6 @@ namespace ProjectIthaca.Models
       }
 
     }
-
 
   }
 }

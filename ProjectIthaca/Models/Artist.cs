@@ -303,8 +303,6 @@ namespace ProjectIthaca.Models
       }
     }
 
-
-
   }
 }
 

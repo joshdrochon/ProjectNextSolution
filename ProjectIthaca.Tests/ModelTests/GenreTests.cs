@@ -4,22 +4,24 @@ using ProjectIthaca.Models;
 using ProjectIthaca;
 using System;
 
-namespace HairSalonProject.Tests
+namespace ProjectIthaca.Tests
 {
   [TestClass]
-  public class StylistTests : IDisposable
+  public class GenreTests : IDisposable
   {
-    public void Dispose()
-    {
-      Stylist.DeleteAll();
-      Client.DeleteAll();
-    }
-
-    public StylistTests()
+    public GenreTests()
     {
       DBConfiguration.ConnectionString =
       "server=localhost;user id=root;password=root;port=8889;database=project_ithaca_test;";
     }
+
+    public void Dispose()
+    {
+      Genre.DeleteAll();
+      Artist.DeleteAll();
+    }
+
+
 
 
     // [TestMethod]
@@ -102,55 +104,55 @@ namespace HairSalonProject.Tests
     //   // Assert.AreEqual(testClientList.Count, 2);
 
     [TestMethod]
-    public void Test_AddClient_AddsClientToStylist()
+    public void Test_AddArtist_AddsArtistToGenre()
     {
       //Arrange
-      Stylist testStylist = new Stylist
-      ("Nemo", "FindMe@gmail.com", "09/09/1999");
-      testStylist.Save();
+      Genre testGenre = new Genre
+      ("Hip Hop", "Grab your umbrella for a Lil Wayne", "Current");
+      testGenre.Save();
 
-      Client testClient = new Client
-      ("Darth Vader", "Chosen1@gmail.com", "N/A");
-      testClient.Save();
+      Artist testArtist = new Artist
+      ("Muse", "1999", "An awesome group from UK", true);
+      testArtist.Save();
 
-      Client testClient2 = new Client
-      ("Darth Maul", "whoknows@uw.edu", "N/A");
-      testClient2.Save();
+      Artist testArtist2 = new Artist
+      ("The Beatles", "1959", "British Invasion anyone?", false);
+      testArtist2.Save();
 
       //Act
-      testStylist.AddClient(testClient);
-      testStylist.AddClient(testClient2);
+      testGenre.AddArtist(testArtist);
+      testGenre.AddArtist(testArtist2);
 
-      List<Client> result = testStylist.GetClients();
-      List<Client> testList = new List<Client>{testClient, testClient2};
+      List<Genre> result = testStylist.GetGenres();
+      List<Genre> testList = new List<Genre>{testGenre, testGenre2};
 
       //Assert
       CollectionAssert.AreEqual(result, testList);
     }
 
     [TestMethod]
-    public void GetClients_ReturnsAllStylistClients_ClientList()
+    public void GetArtists_ReturnsAllGenreArtists_ArtistList()
     {
       //Arrange
-      Stylist testStylist = new Stylist
-      ("SomeName", "someone@gmail.com", "N/A");
-      testStylist.Save();
+      Genre testGenre = new Genre
+      ("DubStep", "Robots making music!", "Post-Modern");
+      testGenre.Save();
 
-      Client testClient1 = new Client
-      ("Mace Windu", "Windu@gmail.com", "N/A");
-      testClient1.Save();
+      Artist testArtist1 = new Artist
+      ("Lindsey Stirling", "2007", "Violinst with some good vibes!", true);
+      testArtist1.Save();
 
-      Client testClient2 = new Client
-      ("Samuel Jackson", "Jackson@gmail.com", "N/A");
-      testClient2.Save();
+      Artist testArtist2 = new Artist
+      ("The Doors", "1965", "Mix of this and that!", false);
+      testArtist2.Save();
 
       //Act
-      testStylist.AddClient(testClient1);
-      List<Client> savedClients = testStylist.GetClients();
-      List<Client> testList = new List<Client> {testClient1};
+      testGenre.AddArtist(testArtist1);
+      List<Artist> savedArtists = testGenre.GetArtists();
+      List<Artist> testList = new List<Artist> {testArtist1};
 
       //Assert
-      CollectionAssert.AreEqual(testList, savedClients);
+      CollectionAssert.AreEqual(savedArtists, testList);
     }
 
   }

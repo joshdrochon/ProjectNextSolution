@@ -7,9 +7,9 @@ using System;
 namespace ProjectIthaca.Tests
 {
   [TestClass]
-  public class ClientTests : IDisposable
+  public class ArtistTests : IDisposable
   {
-    public ClientTests()
+    public ArtistTests()
     {
       DBConfiguration.ConnectionString =
       "server=localhost;user id=root;password=root;port=8889;database=project_ithaca_test;";
@@ -17,8 +17,8 @@ namespace ProjectIthaca.Tests
 
     public void Dispose()
     {
-      Client.DeleteAll();
-      Stylist.DeleteAll();
+      Artist.DeleteAll();
+      Genre.DeleteAll();
     }
 
     // [TestMethod]
@@ -84,50 +84,50 @@ namespace ProjectIthaca.Tests
     // }
 
     [TestMethod]
-    public void AddStylist_AddsStylistToClient_StylistList()
+    public void AddGenre_AddsGenreToArtist_GenreList()
     {
       //Arrange
-      Client testClient = new Client
-      ("Ramen Noodles", "IamNoodle@gmail.com", "02/29/2019");
-      testClient.Save();
+      Artist testArtist = new Artist
+      ("The Strokes", "2001", "A group from New York", true);
+      testArtist.Save();
 
-      Stylist testStylist = new Stylist
-      ("Finn", "Finn@gmail.com", "07/06/1941");
-      testStylist.Save();
+      Genre testGenre = new Genre
+      ("Rock", "Evolved from Rock and Roll", "Current");
+      testGenre.Save();
 
       //Act
-      testClient.AddStylist(testStylist);
+      testArtist.AddGenre(testGenre);
 
-      List<Stylist> result = testClient.GetStylists();
-      List<Stylist> testList = new List<Stylist>{testStylist};
+      List<Genre> result = testArtist.GetGenres();
+      List<Genre> testList = new List<Genre>{testGenre};
 
       //Assert
-      CollectionAssert.AreEqual(testList, result);
+      CollectionAssert.AreEqual(result,testList);
     }
 
     [TestMethod]
-    public void GetStylists_ReturnsAllClientStylists_StylistList()
+    public void GetGenres_ReturnsAllArtistGenres_GenreList()
     {
       //Arrange
-      Client testClient = new Client
-      ("Bill", "Nye@gmail.com", "06/13/2049");
-      testClient.Save();
+      Artist testArtist = new Artist
+      ("Desert Dwellers", "2011", "An awesome band!", true);
+      testArtist.Save();
 
-      Stylist testStylist1 = new Stylist
-      ("Samuel Adams", "Adams@gmail.com", "06/13/1969");
+      Genre testGenre1 = new Genre
+      ("EDM", "Electronic Dance Music", "Post-Modern");
       testStylist1.Save();
 
-      Stylist testStylist2 = new Stylist
-      ("Jimbob", "Jim@gmail.com", "09/17/2001");
+      Genre testGenre2 = new Genre
+      ("Jazz", "Influenced by R&B", "Late 19th Century");
       testStylist2.Save();
 
       //Act
-      testClient.AddStylist(testStylist1);
-      List<Stylist> result = testClient.GetStylists();
-      List<Stylist> testList = new List<Stylist> {testStylist1};
+      testArtist.AddGenre(testGenre1);
+      List<Genre> result = testArtist.GetGenres();
+      List<Genre> testList = new List<Genre> {testGenre1};
 
       //Assert
-      CollectionAssert.AreEqual(testList, result);
+      CollectionAssert.AreEqual(result, testList);
     }
 
 
