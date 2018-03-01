@@ -1,0 +1,18 @@
+@{
+  Layout = "_Layout";
+}
+
+<div class="jumbotron">
+  <form action="/genres" method="post">
+    Name: <input name="genre-name" type="text" required>
+    Description: <input name="genre-description" type="text" required>
+    Era: <select name="genre-era">
+          <option>Classical</option>
+          <option>Roaring 20s</option>
+          <option>British Invasion</option>
+          <option>Modern</option>
+          <option>Post-Modern</option>
+        </select>
+    <button class="btn btn-success" type="submit">Add</button>
+  </form>
+</div>

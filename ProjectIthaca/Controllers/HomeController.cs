@@ -14,7 +14,7 @@ namespace ProjectIthaca.Controllers
             return View(Genre.GetAll());
         }
 
-        Genre Controllers
+        //Genre Controllers
 
         [HttpGet("/genres/new")]
         public ActionResult NewGenreForm()
@@ -28,9 +28,9 @@ namespace ProjectIthaca.Controllers
             Genre newGenre = new Genre
             (Request.Form["genre-name"],
              Request.Form["genre-description"],
-             Request.Form["stylist-era"]);
+             Request.Form["genre-era"]);
 
-             newGenre.Save(); //must save to database  for getAll method to grab it
+             newGenre.Save(); //must save to database for getAll method to grab it
 
              List<Genre> allGenres = Genre.GetAll();
 
@@ -68,8 +68,8 @@ namespace ProjectIthaca.Controllers
             Artist newArtist = new Artist
             (Request.Form["artist-name"],
              Request.Form["artist-debut"],
-             Request.Form["artist-description"],
-             int.Parse(Request.Form["artist-active"]));
+             Request.Form["artist-bio"],
+             true);
 
              newArtist.Save(); //must save to database  for getAll method to grab it
 

@@ -1,0 +1,25 @@
+@using ProjectIthaca.Models;
+
+@{
+  Layout = "_Layout";
+  List<Genre> artistGenres = Model.GetGenres();
+}
+
+<div class="jumbotron">
+  <p><a href='/'>Home</a></p>
+  <p><text>Name: </text>@Model.GetName()</p>
+  <p><text>Debut: </text>@Model.GetDebut()</p>
+  <p><text>Bio: </text>@Model.GetDescription()</p>
+  <hr>
+  <p>Genre:</p>
+  @foreach(var genre in artistGenres)
+  {
+    <p>@genre.GetName()</p>
+  }
+</div>
+
+
+
+
+<!-- Model refers to whatever is passed into the View's parameters.
+In this case it's return View(artist); -->

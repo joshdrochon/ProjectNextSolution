@@ -4,8 +4,8 @@
 
 <!--each new list item is an instance of the Stylist class-->
 <div class="jumbotron">
-  <p><a id="all-genres" href="/genres">View all clients</a></p>
-  <h1>Artists</h1>
+  <p><a id="all-artists" href="/artists">View all artists</a></p>
+  <h1>Genres</h1>
     @foreach (var genre in Model)
     {
       <h3 id="genre-list"><a href='/genres/@genre.GetId()'>@genre.GetName()</a></h3>
