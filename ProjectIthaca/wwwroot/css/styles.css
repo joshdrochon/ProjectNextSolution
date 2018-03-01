@@ -2,8 +2,11 @@ body{
   background-color: #7E8F7C;
 }
 
-#sample-artist{
-  display: inline;
+#genres-img{
+  max-width: 70%;
+  margin-top: 20px;
+  opacity: 0.9;
+  float: left;
 }
 
 #stylist-list{
@@ -40,6 +43,12 @@ input{
   padding: 1rem;
   background-color: #7E8F7C;
   text-align: center;
+}
+
+#home-content{
+  background-color: #878787;
+  box-shadow: 0 0 10px black;
+  text-align: right;
 }
 
 .jumbotron{

@@ -75,7 +75,7 @@ namespace ProjectIthaca.Controllers
 
             Genre thisGenre = Genre.Find(Int32.Parse(Request.Form["artist-genre"]));
 
-             //this will add the newArtist created from the form to the genres_artists table
+             //this will add the newArtist created from the form to the genres_artists table so Genre.GetArtists can grab its artists
              thisGenre.AddArtist(newArtist);
 
              //returns name of page and variable

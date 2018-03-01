@@ -6,7 +6,7 @@
   <p><text>Name: </text>@Model.GetName()</p>
   <p><text>Description: </text>@Model.GetDescription()</p>
   <p><text>Era: </text>@Model.GetEra()</p>
-  <p id="sample-artist">Sample Artists:</p><p><a href="/artists/new">Add artist</a></p>
+  <p>Sample Artists:</p>
   <ul>
     @foreach(var artist in Model.GetArtists())
     {
