@@ -123,9 +123,10 @@ namespace ProjectIthaca.Tests
       testGenre.AddArtist(testArtist);
       testGenre.AddArtist(testArtist2);
 
-      List<Genre> result = testStylist.GetGenres();
-      List<Genre> testList = new List<Genre>{testGenre, testGenre2};
-
+      List<Artist> result = testGenre.GetArtists();
+      List<Artist> testList = new List<Artist>{};
+      testList.Add(testArtist);
+      testList.Add(testArtist2);
       //Assert
       CollectionAssert.AreEqual(result, testList);
     }

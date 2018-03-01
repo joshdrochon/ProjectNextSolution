@@ -1,0 +1,13 @@
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthicaTests.deps.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthicaTests.runtimeconfig.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthicaTests.runtimeconfig.dev.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/obj/Debug/netcoreapp1.1/ProjectIthicaTests.AssemblyInfo.cs
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthicaTests.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthicaTests.pdb
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthaca.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/bin/Debug/netcoreapp1.1/ProjectIthaca.pdb
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/obj/Debug/netcoreapp1.1/ProjectIthicaTests.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca.Tests/obj/Debug/netcoreapp1.1/ProjectIthicaTests.pdb

@@ -65,22 +65,22 @@ namespace ProjectIthaca.Models
     //_active setter/getter
     public bool GetActive()
     {
-      return _active
+      return _active;
     }
     public void SetActive(bool newActive)
     {
-      _active = newActive
+      _active = newActive;
     }
 
-    public override bool Equals(System.Object otherClient)
+    public override bool Equals(System.Object otherArtist)
     {
-      if (!(otherClient is Artist))
+      if (!(otherArtist is Artist))
       {
         return false;
       }
       else
       {
-        Artist newClient = (Artist) otherArtist;
+        Artist newArtist = (Artist) otherArtist;
         bool idEquality = this.GetId() == newArtist.GetId();
 
         return (idEquality);
@@ -102,11 +102,11 @@ namespace ProjectIthaca.Models
         string artistName = rdr.GetString(1);
         string artistDebut = rdr.GetString(2);
         string artistDescription = rdr.GetString(3);
-        bool artistActive = rdr.GetBool(4);
+        bool artistActive = rdr.GetBoolean(4);
 
         Artist newArtist = new Artist
         (artistName, artistDebut, artistDescription, artistActive, artistId);
-        allClients.Add(newArtist);
+        allArtists.Add(newArtist);
       }
       conn.Close();
       if(conn != null)
@@ -121,7 +121,7 @@ namespace ProjectIthaca.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"SELECT genre_id FROM genres_artits WHERE artist_id = @artisttId;";
+      cmd.CommandText = @"SELECT genre_id FROM genres_artists WHERE artist_id = @artistId;";
 
       MySqlParameter artistIdParameter = new MySqlParameter();
       artistIdParameter.ParameterName = "@artistId";
@@ -142,7 +142,7 @@ namespace ProjectIthaca.Models
       foreach (int genreId in genreIds)
       {
         var genreQuery = conn.CreateCommand() as MySqlCommand;
-        genreQuery.CommandText = @"SELECT * FROM genre WHERE id = @GenreId;";
+        genreQuery.CommandText = @"SELECT * FROM genres WHERE id = @GenreId;";
 
         MySqlParameter genreIdParameter = new MySqlParameter();
         genreIdParameter.ParameterName = "@GenreId";
@@ -158,7 +158,7 @@ namespace ProjectIthaca.Models
           string genreEra = genreQueryRdr.GetString(3);
 
           Genre foundGenre = new Genre(genreName, genreDescription, genreEra, thisGenreId);
-          stylists.Add(foundGenre);
+          genres.Add(foundGenre);
         }
         genreQueryRdr.Dispose();
       }
@@ -178,7 +178,7 @@ namespace ProjectIthaca.Models
       var cmd = conn.CreateCommand() as MySqlCommand;
 
       cmd.CommandText = @"INSERT INTO artists (id, name, debut, description, active)
-      VALUES (@artistId, @artistName, @AristDebut, @artistDescription, @artistActive);";
+      VALUES (@artistId, @artistName, @artistDebut, @artistDescription, @artistActive);";
 
       MySqlParameter id = new MySqlParameter();
       id.ParameterName = "@artistId";
@@ -222,8 +222,7 @@ namespace ProjectIthaca.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM artist;";
-      cmd.CommandText = @"DELETE FROM genre_artists;";
+      cmd.CommandText = @"DELETE FROM artists;";
 
       cmd.ExecuteNonQuery();
 
@@ -253,7 +252,7 @@ namespace ProjectIthaca.Models
       string artistName = "";
       string artistDescription = "";
       string artistDebut = "";
-      bool artistActive = null;
+      bool artistActive = false;
 
       while(rdr.Read())
       {
@@ -262,7 +261,7 @@ namespace ProjectIthaca.Models
         artistName = rdr.GetString(1);
         artistDebut = rdr.GetString(2);
         artistDescription = rdr.GetString(3);
-        artistActive = rdr.GetBool(4);
+        artistActive = rdr.GetBoolean(4);
       }
 
       Artist foundArtist = new Artist

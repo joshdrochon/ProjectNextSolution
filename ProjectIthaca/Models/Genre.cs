@@ -13,13 +13,12 @@ namespace ProjectIthaca.Models
     private string _era;
 
 
-    public Stylist(string Name, string Description, string Era, int Id=0)
+    public Genre(string Name, string Description, string Era, int Id=0)
     {
       this._id = Id;
       this._name = Name;
       this._description = Description;
       this._era= Era;
-
     }
 
     //_id getter/setter
@@ -59,7 +58,7 @@ namespace ProjectIthaca.Models
     }
     public void SetEra(string newEra)
     {
-      _era = neEra;
+      _era = newEra;
     }
 
     public override bool Equals(System.Object otherGenre)
@@ -145,13 +144,16 @@ namespace ProjectIthaca.Models
           string artistName = artistQueryRdr.GetString(1);
           string artistDebut = artistQueryRdr.GetString(2);
           string artistDescription = artistQueryRdr.GetString(3);
-          bool artistActive = rdr.GetBool(4);
+          bool artistActive = artistQueryRdr.GetBoolean(4);
 
-          Artist foundArtist = new Artist(artistName, artistDebut, artistDescription, thisArtistId);
+          Artist foundArtist = new Artist(artistName, artistDebut, artistDescription, artistActive, thisArtistId);
           artists.Add(foundArtist);
         }
+
         artistQueryRdr.Dispose();
+
       }
+
       conn.Close();
       if (conn != null)
       {
@@ -176,14 +178,14 @@ namespace ProjectIthaca.Models
       cmd.Parameters.Add(id);
 
       MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@stylistName";
+      name.ParameterName = "@genreName";
       name.Value = this._name;
       cmd.Parameters.Add(name);
 
-      MySqlParameter description = new MySqlParameter();
+      MySqlParameter description= new MySqlParameter();
       description.ParameterName = "@genreDescription";
       description.Value = this._description;
-      description.Parameters.Add(email);
+      cmd.Parameters.Add(description);
 
       MySqlParameter era = new MySqlParameter();
       era.ParameterName = "@genreEra";
@@ -217,7 +219,7 @@ namespace ProjectIthaca.Models
       }
     }
 
-    public static Stylist Find(int id)
+    public static Genre Find(int id)
     {
       MySqlConnection conn = DB.Connection();
       conn.Open();
@@ -269,12 +271,12 @@ namespace ProjectIthaca.Models
 
       MySqlParameter genre_id = new MySqlParameter();
       genre_id.ParameterName = "@GenreId";
-      genre_id.Value = newGenre.GetId();
+      genre_id.Value = this._id;
       cmd.Parameters.Add(genre_id);
 
       MySqlParameter artist_id = new MySqlParameter();
       artist_id.ParameterName = "@ArtistId";
-      artist_id.Value = _id;
+      artist_id.Value = newArtist.GetId();
       cmd.Parameters.Add(artist_id);
 
       cmd.ExecuteNonQuery();

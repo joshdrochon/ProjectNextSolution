@@ -115,11 +115,11 @@ namespace ProjectIthaca.Tests
 
       Genre testGenre1 = new Genre
       ("EDM", "Electronic Dance Music", "Post-Modern");
-      testStylist1.Save();
+      testGenre1.Save();
 
       Genre testGenre2 = new Genre
       ("Jazz", "Influenced by R&B", "Late 19th Century");
-      testStylist2.Save();
+      testGenre2.Save();
 
       //Act
       testArtist.AddGenre(testGenre1);

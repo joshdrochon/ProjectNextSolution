@@ -1,0 +1,8 @@
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/bin/Debug/netcoreapp1.1/ProjectIthaca.deps.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/bin/Debug/netcoreapp1.1/ProjectIthaca.runtimeconfig.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/bin/Debug/netcoreapp1.1/ProjectIthaca.runtimeconfig.dev.json
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/obj/Debug/netcoreapp1.1/ProjectIthaca.AssemblyInfo.cs
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/bin/Debug/netcoreapp1.1/ProjectIthaca.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/bin/Debug/netcoreapp1.1/ProjectIthaca.pdb
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/obj/Debug/netcoreapp1.1/ProjectIthaca.dll
+/Users/Guest/Desktop/ProjectIthaca.Solution/ProjectIthaca/obj/Debug/netcoreapp1.1/ProjectIthaca.pdb
