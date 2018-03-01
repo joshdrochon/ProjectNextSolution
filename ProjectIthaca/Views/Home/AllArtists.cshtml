@@ -1,0 +1,36 @@
+@{
+  Layout = "_Layout";
+}
+
+<!--each new list item is an instance of the Stylist class-->
+<div class="jumbotron">
+  <p><a href="/">Home</a></p>
+  <h1>Clients</h1>
+  @foreach (var artist in Model)
+    {
+      <h4 id="artist-list"><a href='/artists/@artist.GetId()'>@artist.GetName()</a></h4>
+    }
+</div>
+
+<div class="footer">
+  <form action="/artists/delete" method="post" id="clear-artists">
+    <button class="btn btn-danger" type="submit" name="button">Remove Artists</button>
+  </form>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $("#clear-artists").submit(function(event) {
+      var doDelete = confirm("Are you sure you want remove all artists?");
+      if (!doDelete) {
+        event.preventDefault();
+      }
+    });
+  });
+</script>
+
+<!-- if it's true that doDelete is false because 'NO' was clicked,
+then preventDefault, ie don't submit "clear-artists" form -->
+
+<!-- if it's false that doDelete is false, because 'YES' was clicked,
+ie doDelete is true, then do not preventDefault, ie submit the form -->

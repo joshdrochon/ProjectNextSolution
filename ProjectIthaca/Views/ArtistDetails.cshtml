@@ -1,0 +1,17 @@
+@using ProjectIthaca.Models;
+
+@{
+  Layout = "_Layout";
+  Genre primaryGenre = Model.GetGenre();
+  string genreName = primaryGenre.GetName();
+}
+
+<div class="jumbotron">
+  <p><a href='/'>Home</a></p>
+  <p><text>Name: </text>@Model.GetName()</p>
+  <p><text>Debut: </text>@Model.GetDebut()</p>
+  <p><text>Description: </text>@Model.GetDescription()</p>
+  <p><text>Active: </text>@Model.GetActive()</p>
+  <hr>
+  <p><text>Primary Genre: </text>@genreName</p>
+</div>
