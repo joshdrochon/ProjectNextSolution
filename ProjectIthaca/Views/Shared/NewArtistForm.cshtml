@@ -9,7 +9,10 @@
     Name: <input name="artist-name" type="text" required>
     Debut: <input name="artist-debut" type="number" required>
     Bio: <input name="artist-bio" required>
-    Active: <input name="artist-active">
+    Active: <select name="artist-active">
+              <option value="1">Yes</option>
+              <option value="0">No</option>
+            </select>
 
     Genre: <select name="artist-genre">
                 @foreach(var genre in Genre.GetAll())

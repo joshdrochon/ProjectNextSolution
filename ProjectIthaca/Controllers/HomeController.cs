@@ -65,13 +65,12 @@ namespace ProjectIthaca.Controllers
         [HttpPost("/artists")]
         public ActionResult CreateArtist()
         {
-            Artist newArtist = new Artist
-            (Request.Form["artist-name"],
-             Request.Form["artist-debut"],
-             Request.Form["artist-bio"],
-             true);
+          Artist tempArtist = new Artist("", "", "", false);
+          bool artistActivity = tempArtist.IsActive(Request.Form["artist-active"]);
 
-             newArtist.Save(); //must save to database  for getAll method to grab it
+          Artist newArtist = new Artist
+          (Request.Form["artist-name"], Request.Form["artist-debut"], Request.Form["artist-bio"], artistActivity);
+          newArtist.Save(); //must save to database  for getAll method to grab it
 
              List<Artist> allArtists = Artist.GetAll();
 

@@ -88,6 +88,24 @@ namespace ProjectIthaca.Models
       }
     }
 
+    /* NEW CODE BLOCK */
+
+    public bool IsActive(string formInput)
+    {
+      if(int.Parse(formInput) == 1)
+      {
+        return true;
+      }
+      else
+      {
+        return false;
+      }
+
+    }
+
+    /* NEW CODE BLOCK */
+
+
     public static List<Artist> GetAll()
     {
       List<Artist> allArtists = new List<Artist>();
