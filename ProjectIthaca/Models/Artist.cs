@@ -92,7 +92,7 @@ namespace ProjectIthaca.Models
 
     public bool IsActive(string formInput)
     {
-      if(int.Parse(formInput) == 1)
+      if(formInput == "1")
       {
         return true;
       }

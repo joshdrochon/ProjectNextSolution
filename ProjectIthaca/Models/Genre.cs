@@ -250,7 +250,7 @@ namespace ProjectIthaca.Models
       }
 
       Genre foundGenre = new Genre
-      (genreEra, genreName, genreDescription, genreId);
+      (genreName, genreDescription, genreEra, genreId);
 
       conn.Close();
       if(conn != null)
@@ -286,5 +286,6 @@ namespace ProjectIthaca.Models
         conn.Dispose();
       }
     }
+
   }
 }

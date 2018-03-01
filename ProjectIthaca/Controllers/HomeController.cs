@@ -57,9 +57,10 @@ namespace ProjectIthaca.Controllers
         [HttpGet("/artists/new")]
         public ActionResult NewArtistForm()
         {
-            List<Artist> allArtists = Artist.GetAll();
 
-            return View(allArtists);
+            List<Genre> allGenres = Genre.GetAll(); //NEW LINE!
+
+            return View(allGenres);
         }
 
         [HttpPost("/artists")]
@@ -72,10 +73,13 @@ namespace ProjectIthaca.Controllers
           (Request.Form["artist-name"], Request.Form["artist-debut"], Request.Form["artist-bio"], artistActivity);
           newArtist.Save(); //must save to database  for getAll method to grab it
 
-             List<Artist> allArtists = Artist.GetAll();
+            Genre thisGenre = Genre.Find(Int32.Parse(Request.Form["artist-genre"]));
+
+             //this will add the newArtist created from the form to the genres_artists table
+             thisGenre.AddArtist(newArtist);
 
              //returns name of page and variable
-             return View("AllArtists", allArtists);
+             return RedirectToAction("AllArtists");
 
         }
 
