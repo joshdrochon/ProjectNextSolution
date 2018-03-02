@@ -21,67 +21,67 @@ namespace ProjectIthaca.Tests
       Genre.DeleteAll();
     }
 
-    // [TestMethod]
-    // public void GetAll_DatabaseEmptyAtFirst_0()
-    // {
-    //   //Arrange, Act
-    //   int result = Client.GetAll().Count;
-    //   Console.WriteLine("In line 29 in ClientTests there are " + result + " in the database.");
-    //   //Assert
-    //   Assert.AreEqual(0, result);
-    // }
-    //
-    //
-    // [TestMethod]
-    // public void Save_SavesClientToDataBase_Client()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client
-    //   ("Kilo Ren", "Kilo17@gmail.com", "06/12/12");
-    //   int expectedResult = 1; //one client expected in database
-    //   //Act
-    //   testClient.Save();
-    //   int actualResult = Client.GetAll().Count;
-    //   //Assert
-    //   Assert.AreEqual(expectedResult, actualResult);
-    //   Console.WriteLine(expectedResult);
-    //   Console.WriteLine(actualResult);
-    // }
-    //
-    //
-    // [TestMethod]
-    // public void Save_AssignsIdToObject_Id()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client
-    //   ("Han Solo", "Solo@gmail.com", "03/17/77");
-    //
-    //   //Act
-    //   testClient.Save();
-    //   Client savedClient = Client.GetAll()[0];
-    //
-    //   int result = savedClient.GetId();
-    //   int testId = testClient.GetId();
-    //
-    //   //Assert
-    //   Assert.AreEqual(result, testId);
-    // }
-    //
-    // [TestMethod]
-    // public void Find_FindsClientInDatabase_Client()
-    // {
-    //   //Arrange
-    //   Client testClient = new Client
-    //   ("Reese WitherFork", "ForkR@gmail.com", "02/29/2000");
-    //   testClient.Save();
-    //   //Act
-    //   Client foundClient = Client.Find(testClient.GetId());
-    //   //Assert
-    //   Console.WriteLine("TEST CLIENT ID IS: " + testClient.GetId());
-    //   Console.WriteLine("FOUND CLIENT IS IS: " + foundClient.GetId());
-    //
-    //   Assert.AreEqual(testClient, foundClient);
-    // }
+    [TestMethod]
+    public void GetAll_DatabaseEmptyAtFirst_0()
+    {
+      //Arrange, Act
+      int result = Artist.GetAll().Count;
+      Console.WriteLine("In line 29 in ArtistTests there are " + result + " in the database.");
+      //Assert
+      Assert.AreEqual(0, result);
+    }
+
+
+    [TestMethod]
+    public void Save_SavesArtistToDataBase_Client()
+    {
+      //Arrange
+      Artist testArtist = new Artist
+      ("The Strokes", "2001", "A group from NYC", true);
+      int expectedResult = 1; //one client expected in database
+      //Act
+      testArtist.Save();
+      int actualResult = Artist.GetAll().Count;
+      //Assert
+      Assert.AreEqual(expectedResult, actualResult);
+      Console.WriteLine(expectedResult);
+      Console.WriteLine(actualResult);
+    }
+
+
+    [TestMethod]
+    public void Save_AssignsIdToObject_Id()
+    {
+      //Arrange
+      Artist testArtist = new Artist
+      ("The Beatles", "1960", "British invasion, bro!", false);
+
+      //Act
+      testArtist.Save();
+      Artist savedArtist = Artist.GetAll()[0];
+
+      int result = savedArtist.GetId();
+      int testId = testArtist.GetId();
+
+      //Assert
+      Assert.AreEqual(result, testId);
+    }
+
+    [TestMethod]
+    public void Find_FindsArtistInDatabase_Artist()
+    {
+      //Arrange
+      Artist testArtist = new Artist
+      ("Desert Dwellers", "2011", "Damn good music!", true);
+      testArtist.Save();
+      //Act
+      Artist foundArtist = Artist.Find(testArtist.GetId());
+      //Assert
+      Console.WriteLine("TEST CLIENT ID IS: " + testArtist.GetId());
+      Console.WriteLine("FOUND CLIENT IS IS: " + foundArtist.GetId());
+
+      Assert.AreEqual(testArtist, foundArtist);
+    }
 
     [TestMethod]
     public void AddGenre_AddsGenreToArtist_GenreList()
