@@ -100,22 +100,9 @@ namespace ProjectIthaca.Models
       {
         return false;
       }
-
     }
 
-    // public List<Genre> isChecked(string checkbox)
-    // {
-    //
-    //   List<Genre> theseGenres = new List<Genre>{};
-    //
-    //   if(checkbox == true)
-    //   {
-    //     theseGenres.Add(checkbox);
-    //   }
-    //
-    // }
-
-    /* NEW CODE BLOCK */
+    /* --------------- */
 
 
     public static List<Artist> GetAll()
@@ -144,6 +131,32 @@ namespace ProjectIthaca.Models
         conn.Dispose();
       }
       return allArtists;
+    }
+
+    public void AddGenre(Genre newGenre)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO genres_artists
+      (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
+
+      MySqlParameter genre_id = new MySqlParameter();
+      genre_id.ParameterName = "@GenreId";
+      genre_id.Value = newGenre.GetId();
+      cmd.Parameters.Add(genre_id);
+
+      MySqlParameter artist_id = new MySqlParameter();
+      artist_id.ParameterName = "@ArtistId";
+      artist_id.Value = _id;
+      cmd.Parameters.Add(artist_id);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
     }
 
     public List<Genre> GetGenres()
@@ -304,32 +317,6 @@ namespace ProjectIthaca.Models
       }
 
       return foundArtist;
-    }
-
-    public void AddGenre(Genre newGenre)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO genres_artists
-      (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
-
-      MySqlParameter genre_id = new MySqlParameter();
-      genre_id.ParameterName = "@GenreId";
-      genre_id.Value = newGenre.GetId();
-      cmd.Parameters.Add(genre_id);
-
-      MySqlParameter artist_id = new MySqlParameter();
-      artist_id.ParameterName = "@ArtistId";
-      artist_id.Value = _id;
-      cmd.Parameters.Add(artist_id);
-
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if(conn != null)
-      {
-        conn.Dispose();
-      }
     }
 
   }

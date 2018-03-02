@@ -104,6 +104,32 @@ namespace ProjectIthaca.Models
       return allGenres;
     }
 
+    public void AddArtist(Artist newArtist)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO genres_artists
+      (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
+
+      MySqlParameter genre_id = new MySqlParameter();
+      genre_id.ParameterName = "@GenreId";
+      genre_id.Value = this._id;
+      cmd.Parameters.Add(genre_id);
+
+      MySqlParameter artist_id = new MySqlParameter();
+      artist_id.ParameterName = "@ArtistId";
+      artist_id.Value = newArtist.GetId();
+      cmd.Parameters.Add(artist_id);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
     public List<Artist> GetArtists()
     {
       MySqlConnection conn = DB.Connection();
@@ -259,32 +285,6 @@ namespace ProjectIthaca.Models
       }
 
       return foundGenre;
-    }
-
-    public void AddArtist(Artist newArtist)
-    {
-      MySqlConnection conn = DB.Connection();
-      conn.Open();
-      var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO genres_artists
-      (genre_id, artist_id) VALUES (@GenreId, @ArtistId);";
-
-      MySqlParameter genre_id = new MySqlParameter();
-      genre_id.ParameterName = "@GenreId";
-      genre_id.Value = this._id;
-      cmd.Parameters.Add(genre_id);
-
-      MySqlParameter artist_id = new MySqlParameter();
-      artist_id.ParameterName = "@ArtistId";
-      artist_id.Value = newArtist.GetId();
-      cmd.Parameters.Add(artist_id);
-
-      cmd.ExecuteNonQuery();
-      conn.Close();
-      if(conn != null)
-      {
-        conn.Dispose();
-      }
     }
 
   }
