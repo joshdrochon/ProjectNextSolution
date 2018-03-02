@@ -2,9 +2,17 @@
   Layout = "_Layout";
 }
 
+@using ProjectIthaca.Models;
+
 <div class="jumbotron">
   <p><a href="/">Home</a></p>
   <h1>Artists</h1>
+
+  @if(Model.Count == 0)
+  {
+    <p>There are currently no artists listed.</p>
+  }
+
   @foreach (var artist in Model)
     {
       <h4 id="artist-list"><a href='/artists/@artist.GetId()'>@artist.GetName()</a></h4>

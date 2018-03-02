@@ -103,6 +103,18 @@ namespace ProjectIthaca.Models
 
     }
 
+    // public List<Genre> isChecked(string checkbox)
+    // {
+    //
+    //   List<Genre> theseGenres = new List<Genre>{};
+    //
+    //   if(checkbox == true)
+    //   {
+    //     theseGenres.Add(checkbox);
+    //   }
+    //
+    // }
+
     /* NEW CODE BLOCK */
 
 

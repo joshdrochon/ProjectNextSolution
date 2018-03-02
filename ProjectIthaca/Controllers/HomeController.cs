@@ -71,16 +71,20 @@ namespace ProjectIthaca.Controllers
 
           Artist newArtist = new Artist
           (Request.Form["artist-name"], Request.Form["artist-debut"], Request.Form["artist-bio"], artistActivity);
-          newArtist.Save(); //must save to database  for getAll method to grab it
+          newArtist.Save(); //must save to database for getAll method to grab it
 
-            Genre thisGenre = Genre.Find(Int32.Parse(Request.Form["artist-genre"]));
+          //saves all checked values into a string
+          IEnumerable<String> checkedGenres = Request.Form["artist-genre"];
 
-             //this will add the newArtist created from the form to the genres_artists table so Genre.GetArtists can grab its artists
-             thisGenre.AddArtist(newArtist);
+          foreach(var genre in checkedGenres)
+          {
+            Genre thisGenre = Genre.Find(Int32.Parse(genre));
+            thisGenre.AddArtist(newArtist);
+          }
 
-             //returns name of page and variable
-             return RedirectToAction("AllArtists");
-
+          return RedirectToAction("AllArtists", Artist.GetAll());
+          /*Because Artist.GetAll() is a list, the model that the AllArtists page now has
+          access to must have .Count method directly called on it (See AllArtists for reference)*/
         }
 
         [HttpPost("/artists/delete")]

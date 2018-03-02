@@ -6,6 +6,11 @@
   <img id="genres-img" src="~/img/music-notes.gif">
   <p><a id="all-artists" href="/artists">View all artists</a></p>
   <h1>Genres</h1>
+    @if(Model.Count == 0)
+    {
+      <p>There are currently no genres listed.</p>
+    }
+
     @foreach (var genre in Model)
     {
       <h3 id="genre-list"><a href='/genres/@genre.GetId()'>@genre.GetName()</a></h3>

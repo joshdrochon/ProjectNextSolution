@@ -14,12 +14,18 @@
               <option value="0">No</option>
             </select>
 
-    Genre: <select name="artist-genre">
+    @* Genre: <select name="artist-genre">
                 @foreach(var genre in Genre.GetAll())
                 {
                 <option value="@genre.GetId()">@genre.GetName()</option>
                 }
-             </select>
+             </select> *@
+
+            @foreach(var genre in Genre.GetAll())
+             {
+             <input type="checkbox" value="@genre.GetId()" name="artist-genre" required>@genre.GetName()
+             }
+
     <button class="btn btn-success" type="submit">Submit</button>
   </form>
 </div>
