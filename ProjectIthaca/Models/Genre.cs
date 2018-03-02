@@ -104,6 +104,7 @@ namespace ProjectIthaca.Models
       return allGenres;
     }
 
+    //creates new join table entries
     public void AddArtist(Artist newArtist)
     {
       MySqlConnection conn = DB.Connection();
@@ -234,7 +235,7 @@ namespace ProjectIthaca.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM genres;";
+      cmd.CommandText = @"DELETE FROM genres;"; //old line
 
       cmd.ExecuteNonQuery();
 
@@ -264,7 +265,6 @@ namespace ProjectIthaca.Models
       string genreName = "";
       string genreDescription = "";
       string genreEra = "";
-
 
       while(rdr.Read())
       {

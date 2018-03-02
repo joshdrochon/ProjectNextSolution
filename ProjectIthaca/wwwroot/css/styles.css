@@ -24,7 +24,14 @@ body{
 
 #all-clients{
   color: lightgray;
+}
 
+#cancel{
+  text-align: center;
+}
+
+#cancel a{
+  color: black;
 }
 
 form{
